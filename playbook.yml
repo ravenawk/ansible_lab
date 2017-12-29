@@ -2,10 +2,25 @@
 - hosts: all
   become: yes
   tasks:
-  - user: 
+  - name: Create 'wheel' group if not present
+    group:
+      name: wheel
+      state: present 
+
+  - name: Set 'wheel' group to not enter password for sudo
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: '^%wheel'
+      line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+      validate: 'visudo -cf %s'
+      
+  - name: Add ansible user
+    user: 
       name: ansible 
       # The password is 'ansible'
       password: $6$ak.6MIWYWrEQFx$e2fozesGvytPbVdriuVYzxYbVB4NWG4kIhE/7EO0N5gggyHeROe.GIf98uF.zoCUpX9j9Yfs4UXzZOjFGmmnO0
+      groups: wheel
       comment: "Ansible User" 
       generate_ssh_key: yes 
       ssh_key_bits: 2048 
