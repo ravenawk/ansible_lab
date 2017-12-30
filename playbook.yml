@@ -9,7 +9,7 @@
 
   - name: Set 'wheel' group to not enter password for sudo
     lineinfile:
-      path: /etc/sudoers
+      dest: /etc/sudoers
       state: present
       regexp: '^%wheel'
       line: '%wheel ALL=(ALL) NOPASSWD: ALL'
@@ -17,7 +17,7 @@
       
   - name: Enable ssh by password
     lineinfile:
-      path: /etc/ssh/sshd_config
+      dest: /etc/ssh/sshd_config
       state: present
       regexp: '^PasswordAuthentication'
       line: 'PasswordAuthentication yes'
@@ -29,7 +29,7 @@
 
   - name: Set the host file with all boxes ips and names
     blockinfile:
-      path: /etc/hosts
+      dest: /etc/hosts
       state: present
       block: | 
         192.168.60.4 controller
