@@ -9,11 +9,20 @@
 
   - name: Set 'wheel' group to not enter password for sudo
     lineinfile:
-      dest: /etc/sudoers
+      path: /etc/sudoers
       state: present
       regexp: '^%wheel'
       line: '%wheel ALL=(ALL) NOPASSWD: ALL'
       validate: 'visudo -cf %s'
+      
+  - name: Set the host file with all boxes ips and names
+    blockinfile:
+      path: /etc/hosts
+      state: present
+      block: | 
+        192.168.60.4 controller
+        192.168.60.5 web
+        192.168.60.6 db
       
   - name: Add ansible user
     user: 
