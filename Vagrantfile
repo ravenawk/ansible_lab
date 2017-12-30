@@ -17,20 +17,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	end
 
 	# Application server 1.
-	config.vm.define "app1" do |app|
-	  app.vm.hostname = "orc-app1.dev"
-	  app.vm.network :private_network, ip: "192.168.60.4"
+	config.vm.define "controller" do |controller|
+	  controller.vm.hostname = "controller"
+	  controller.vm.network :private_network, ip: "192.168.60.4"
 	end
 
 	# Application server 2.
-	config.vm.define "app2" do |app|
-	  app.vm.hostname = "orc-app2.dev"
-	  app.vm.network :private_network, ip: "192.168.60.5"
+	config.vm.define "web" do |web|
+	  web.vm.hostname = "app1"
+	  web.vm.network :private_network, ip: "192.168.60.5"
 	end
 	 
 	# Database server.
 	config.vm.define "db" do |db|
-	  db.vm.hostname = "orc-db.dev"
+	  db.vm.hostname = "db"
 	  db.vm.network :private_network, ip: "192.168.60.6"
 	end
 end
