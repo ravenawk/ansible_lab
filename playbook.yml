@@ -15,6 +15,18 @@
       line: '%wheel ALL=(ALL) NOPASSWD: ALL'
       validate: 'visudo -cf %s'
       
+  - name: Enable ssh by password
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      state: present
+      regexp: '^PasswordAuthentication'
+      line: 'PasswordAuthentication yes'
+      
+  - name: Restart sshd
+    service:
+      name: sshd
+      state: restarted
+
   - name: Set the host file with all boxes ips and names
     blockinfile:
       path: /etc/hosts

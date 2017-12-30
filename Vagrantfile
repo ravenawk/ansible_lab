@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 	# Application server 2.
 	config.vm.define "web" do |web|
-	  web.vm.hostname = "app1"
+	  web.vm.hostname = "web"
 	  web.vm.network :private_network, ip: "192.168.60.5"
 	end
 	 
