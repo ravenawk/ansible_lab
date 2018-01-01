@@ -12,17 +12,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  v.memory = 256
 	  v.linked_clone = true
 	end
-	config.vm.provision "ansible" do |ansible|
-	  ansible.playbook = "playbook.yml" 
-	end
 
-	# Application server 1.
+	# Anisible controller server. 
 	config.vm.define "controller" do |controller|
 	  controller.vm.hostname = "controller"
 	  controller.vm.network :private_network, ip: "192.168.60.4"
 	end
 
-	# Application server 2.
+	# Web server.
 	config.vm.define "web" do |web|
 	  web.vm.hostname = "web"
 	  web.vm.network :private_network, ip: "192.168.60.5"
@@ -32,5 +29,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.define "db" do |db|
 	  db.vm.hostname = "db"
 	  db.vm.network :private_network, ip: "192.168.60.6"
+	end
+
+	config.vm.provision "ansible" do |ansible|
+	  ansible.playbook = "playbook.yml" 
 	end
 end
