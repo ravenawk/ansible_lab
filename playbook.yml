@@ -61,10 +61,6 @@
       name: 
         - python2-pip
         - python-devel
-        - paramiko
+        - python-paramiko
         - git
       state: latest
-  - name: Install ansible 2.3
-    pip: 
-      name: ansible
-      version: 2.3
