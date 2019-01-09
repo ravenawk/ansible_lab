@@ -32,9 +32,9 @@
       dest: /etc/hosts
       state: present
       block: | 
-        192.168.60.4 controller
-        192.168.60.5 web
-        192.168.60.6 db
+        192.168.60.4 node1
+        192.168.60.5 node2
+        192.168.60.6 node3
       
   - name: Add ansible user
     user: 
@@ -48,7 +48,7 @@
       ssh_key_file: .ssh/id_rsa
 
 
-- hosts: controller
+- hosts: node1
   become: yes
   tasks:
   - name: Activate epel
@@ -56,11 +56,15 @@
       name: epel-release
       state: latest
 
-  - name: Install ansible
+  - name: Install python libs and git
     yum:
       name: 
-        - ansible
         - python2-pip
         - python-devel
+        - paramiko
         - git
       state: latest
+  - name: Install ansible 2.3
+    pip: 
+      name: ansible
+      version: 2.3

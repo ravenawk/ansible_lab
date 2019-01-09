@@ -14,21 +14,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	end
 
 	# Anisible controller server. 
-	config.vm.define "controller" do |controller|
-	  controller.vm.hostname = "controller"
-	  controller.vm.network :private_network, ip: "192.168.60.4"
+	config.vm.define "node1" do |node1|
+	  node1.vm.hostname = "node1"
+	  node1.vm.network :private_network, ip: "192.168.60.4"
 	end
 
 	# Web server.
-	config.vm.define "web" do |web|
-	  web.vm.hostname = "web"
-	  web.vm.network :private_network, ip: "192.168.60.5"
+	config.vm.define "node2" do |node2|
+	  node2.vm.hostname = "node2"
+	  node2.vm.network :private_network, ip: "192.168.60.5"
 	end
 	 
 	# Database server.
-	config.vm.define "db" do |db|
-	  db.vm.hostname = "db"
-	  db.vm.network :private_network, ip: "192.168.60.6"
+	config.vm.define "node3" do |node3|
+	  node3.vm.hostname = "node3"
+	  node3.vm.network :private_network, ip: "192.168.60.6"
 	end
 
 	config.vm.provision "ansible" do |ansible|
