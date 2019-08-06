@@ -8,28 +8,36 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.box = "centos/7"
 	config.ssh.insert_key = false
 	config.vm.synced_folder ".", "/vagrant", disabled: true
-	config.vm.provider :virtualbox do |v|
-	  v.memory = 256
-	  v.linked_clone = true
-	end
 
 	# Anisible controller server. 
 	config.vm.define "node1" do |node1|
 	  node1.vm.hostname = "node1"
 	  node1.vm.network :private_network, ip: "192.168.60.4"
-	end
+	  node1.vm.provider :virtualbox do |v1|
+            v1.customize ['modifyvm', :id, '--memory', '4096']
+            v1.customize ['modifyvm', :id, '--cpus', '2']
+	  end
+        end
 
 	# Web server.
 	config.vm.define "node2" do |node2|
 	  node2.vm.hostname = "node2"
 	  node2.vm.network :private_network, ip: "192.168.60.5"
-	end
+	  node2.vm.provider :virtualbox do |v2|
+            v2.customize ['modifyvm', :id, '--memory', '1024']
+            v2.customize ['modifyvm', :id, '--cpus', '1']
+	  end
+        end
 	 
 	# Database server.
 	config.vm.define "node3" do |node3|
 	  node3.vm.hostname = "node3"
 	  node3.vm.network :private_network, ip: "192.168.60.6"
-	end
+	  node3.vm.provider :virtualbox do |v3|
+            v3.customize ['modifyvm', :id, '--memory', '1024']
+            v3.customize ['modifyvm', :id, '--cpus', '1']
+  	  end
+        end
 
 	config.vm.provision "ansible" do |ansible|
 	  ansible.playbook = "playbook.yml" 

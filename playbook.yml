@@ -56,11 +56,6 @@
       name: epel-release
       state: latest
 
-  - name: Copy ansible 2.3 rpm
-    copy:
-      src: ansible-2.3.2.0-2.el7.noarch.rpm
-      dest: /home/ansible/ansible-2.3.2.0-2.el7.noarch.rpm
-
   - name: Install python libs and git
     yum:
       name: 
@@ -68,5 +63,5 @@
         - python-devel
         - python-paramiko
         - git
-        - /home/ansible/ansible-2.3.2.0-2.el7.noarch.rpm
+        - ansible
       state: latest
