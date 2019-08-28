@@ -14,10 +14,6 @@ boxes = [
     name: 'node3',
     ipv4net: '192.168.60.6',
   },
-  {
-    name: 'node4',
-    ipv4net: '192.168.60.7',
-  },
 ]
     
 
@@ -46,8 +42,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	    config.vm.hostname = box[:name]
 	    config.vm.network :private_network, ip: box[:ipv4net]
 	  config.vm.provider :virtualbox do |node|
-            node.customize ['modifyvm', :id, '--memory', '1024']
-            node.customize ['modifyvm', :id, '--cpus', '1']
+            node.customize ['modifyvm', :id, '--memory', '2048']
+            node.customize ['modifyvm', :id, '--cpus', '2']
 	  end
         end
       end

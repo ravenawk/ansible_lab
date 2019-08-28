@@ -35,7 +35,6 @@
         192.168.60.4 node1
         192.168.60.5 node2
         192.168.60.6 node3
-        192.168.60.7 node4
       
   - name: Add ansible user
     user: 
