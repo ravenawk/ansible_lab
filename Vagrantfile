@@ -42,8 +42,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	    config.vm.hostname = box[:name]
 	    config.vm.network :private_network, ip: box[:ipv4net]
 	  config.vm.provider :virtualbox do |node|
-            node.customize ['modifyvm', :id, '--memory', '2048']
-            node.customize ['modifyvm', :id, '--cpus', '2']
+            node.customize ['modifyvm', :id, '--memory', '1024']
+            node.customize ['modifyvm', :id, '--cpus', '1']
 	  end
         end
       end
