@@ -30,8 +30,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  node1.vm.hostname = "node1"
 	  node1.vm.network :private_network, ip: "192.168.60.4"
 	  node1.vm.provider :virtualbox do |v1|
-            v1.customize ['modifyvm', :id, '--memory', '4096']
-            v1.customize ['modifyvm', :id, '--cpus', '2']
+            v1.customize ['modifyvm', :id, '--memory', '1024']
+            v1.customize ['modifyvm', :id, '--cpus', '1']
 	  end
         end
 
