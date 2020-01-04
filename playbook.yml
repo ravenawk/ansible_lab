@@ -39,8 +39,7 @@
   - name: Add ansible user
     user: 
       name: ansible 
-      # The password is 'ansible'
-      password: $6$ak.6MIWYWrEQFx$e2fozesGvytPbVdriuVYzxYbVB4NWG4kIhE/7EO0N5gggyHeROe.GIf98uF.zoCUpX9j9Yfs4UXzZOjFGmmnO0
+      password: "{{ 'ansible' | password_hash('sha512') }}"
       groups: wheel
       comment: "Ansible User" 
       generate_ssh_key: yes 
