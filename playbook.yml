@@ -32,14 +32,18 @@
       dest: /etc/hosts
       state: present
       block: | 
-        192.168.60.4 node1
-        192.168.60.5 node2
-        192.168.60.6 node3
+        192.168.60.4 workstation workstation.example.com
+        192.168.60.5 servera servera.example.com
+        192.168.60.6 serverb serverb.example.com
+        192.168.60.7 serverc serverc.example.com
+        192.168.60.8 serverd serverd.example.com
       
   - name: Add ansible user
+    vars:
+      ansible_pass: ansible
     user: 
       name: ansible 
-      password: "{{ 'ansible' | password_hash('sha512') }}"
+      password: "{{ ansible_pass | password_hash('sha512', 'therandomsalt' ) }}"
       groups: wheel
       comment: "Ansible User" 
       generate_ssh_key: yes 
@@ -47,7 +51,7 @@
       ssh_key_file: .ssh/id_rsa
 
 
-- hosts: node1
+- hosts: workstation.example.com
   become: yes
   tasks:
   - name: Activate epel
@@ -58,9 +62,7 @@
   - name: Install python libs and git
     yum:
       name: 
-        - python2-pip
-        - python-devel
-        - python-paramiko
-        - git
         - ansible
+        - git
+        - python3
       state: latest

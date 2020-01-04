@@ -1,2 +1,4 @@
 # ansible_lab
-Playing with vagrant, git, and ansible to get an ansible lab up and running for study.
+A new ansible lab with centos 8
+
+Multiple vms but easily customizable in the Vagrantfile and playbook.yml
